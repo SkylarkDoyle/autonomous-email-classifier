@@ -33,6 +33,7 @@ A lightweight, automated system that connects to the Gmail API to read an inbox,
 - **Integrating and running** a pre-trained Hugging Face zero-shot classification model for natural language processing.
 - **Designing and deploying** interactive web interfaces using Gradio, tailored for Hugging Face Spaces.
 - **Evaluating model performance** and tracking accuracy metrics (like precision and recall) using Scikit-Learn.
+- **Mounting Gradio on FastAPI** to build a robust hybrid application that safely handles custom OAuth routes alongside the UI.
 
 ## 🚀 Getting Started
 

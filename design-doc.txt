@@ -1,0 +1,10 @@
+Goal: I want to build an AI-powered email classifier system that can automatically 
+classify an email inbox(input) into different categories(output).
+Problem: I receive a lot of emails and I want to be able to classify them into different categories.
+To build this, i have to learn and understand how to connect to google mail api, huggingface models 
+and build a gradio app, how to track accuracy of the model
+Quick question: where would pandas and scikit learn fit into this project?
+Constraints: It must be automatic, and we will stick to using huggingface for the 
+model inference and using gradio for the frontend and deployment on HF Spaces
+Done when: The system automatically classifies any input email address(via gradio UI) 
+and labels the inbox based on that classification and i can see these in a dashboard as a tab category

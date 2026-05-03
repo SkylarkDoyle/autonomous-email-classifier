@@ -33,14 +33,6 @@ class Dashboard:
             others_df,
         )
 
-    def auth_and_process(self, redirect_url: str):
-        """
-        Connects the Gmail fetching logic to the AI Engine classification logic.
-        Must return 8 DataFrames to populate the 8 UI tabs.
-        """
-        self.gmail.authenticate(redirect_url)
-        return self._fetch_and_sort()
-
     def refresh_data(self):
         """Triggered by the Refresh button."""
         return self._fetch_and_sort()
@@ -74,6 +66,21 @@ class Dashboard:
                     others_df = gr.DataFrame()
 
             refresh_btn.click(
+                fn=self.refresh_data,
+                inputs=[],
+                outputs=[
+                    work_df,
+                    urgent_df,
+                    personal_df,
+                    finance_df,
+                    social_df,
+                    promotions_df,
+                    spam_df,
+                    others_df,
+                ],
+            )
+
+            demo.load(
                 fn=self.refresh_data,
                 inputs=[],
                 outputs=[

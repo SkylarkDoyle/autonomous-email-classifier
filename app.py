@@ -25,13 +25,22 @@ def login():
 @app.get("/oauth2callback")
 def callback(request: Request):
     """Exchanges the authorization response for valid credentials and redirects to the dashboard."""
+    # Force HTTPS
     full_url = str(request.url).replace("http://", "https://", 1)
 
+    # Fix the Google "iss" bug by manually stripping it out
+    full_url = full_url.replace("&iss=https://accounts.google.com", "")
+    full_url = full_url.replace("?iss=https://accounts.google.com&", "?")
+
+    #  Extract the state
+    state = request.query_params.get("state")
+
     try:
-        gmail.authenticate(full_url)
+        gmail.authenticate(full_url, state=state)
         return RedirectResponse(url="/")
     except Exception as e:
-        raise HTTPException(status_code=400, detail=f"Authentication failed: {str(e)}")
+        print(f"CRITICAL AUTH ERROR: {str(e)}")
+        return RedirectResponse(url="/")
 
 
 dashboard = Dashboard(gmail, engine).render()

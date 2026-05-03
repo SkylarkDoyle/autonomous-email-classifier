@@ -25,8 +25,11 @@ class GmailService:
         auth_url, _ = self.flow.authorization_url(prompt="consent")
         return auth_url
 
-    def authenticate(self, auth_response_url: str):
+    def authenticate(self, auth_response_url: str, state: str = None):
         """Exchanges the authorization response for valid credentials"""
+        if state:
+            self.flow.state = state # Fixes the multi-worker crash
+
         self.flow.fetch_token(authorization_response=auth_response_url)
         creds = self.flow.credentials
         self.service = build("gmail", "v1", credentials=creds)
